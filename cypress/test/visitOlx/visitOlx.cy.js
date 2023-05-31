@@ -2,7 +2,7 @@ import { OlxHomePage } from "../../support/pages/olxHomePagePO/olxHomePagePO"
 
 describe("Visit Olx Website", function () {
     before(function(){
-        cy.visit("https://www.olx.com.pk");
+        cy.visit("/");
     })
 
     it("Validate Olx Home Page", function () {
