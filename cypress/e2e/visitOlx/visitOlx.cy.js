@@ -1,4 +1,4 @@
-import { OlxHomePage } from "../../support/pages/vistOlxPO/visitOlxPO"
+import { OlxHomePage } from "../../support/pages/vistOlxPO/olxHomePagePO"
 
 describe("Visit Olx Website", function () {
     before(function(){
