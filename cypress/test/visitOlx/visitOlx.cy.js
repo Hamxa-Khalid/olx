@@ -9,16 +9,11 @@ describe("Visit Olx Website", function () {
 
         cy.url().should('include', 'olx.com');
         cy.title().should('eq', 'OLX - Buy and Sell for free anywhere in Pakistan with OLX online classifieds');
-
-        // cy.on('window:confirm', (t) => {
-        //     expect(t).to.contains("Don't Allow");
-        //     return false;
-        // })
+        cy.get('[aria-label="Login"]').should['have.text', 'Login'];
         
         cy.get('button').contains("Don't Allow").click();
         
-        // cy.get("input[type='search']").type('Mobiles');
-        // cy.get('button[aria-label="Search"]').click();
+        
     })
 })
 
