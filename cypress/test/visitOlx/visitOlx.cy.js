@@ -10,7 +10,6 @@ describe("Visit Olx Website", function () {
         olxObj.verifyUrl().should('include', 'olx.com');
         olxObj.verifyTitle().should('eq', 'OLX - Buy and Sell for free anywhere in Pakistan with OLX online classifieds');
         olxObj.closeOlxHomePageAlert().contains("Don't Allow").should('be.visible').click();        
-        // olxObj.closeOlxHomePageAlert().contains("Don't Allow").click();        
         
     })
 })
