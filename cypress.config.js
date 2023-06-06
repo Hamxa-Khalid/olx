@@ -7,6 +7,7 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     baseUrl: "https://www.olx.com.pk",
-    specPattern: "cypress/test/**/*.cy.js"
+    specPattern: "cypress/test/**/*.cy.js",
+    defaultCommandTimeout: 20000
   },
 });
