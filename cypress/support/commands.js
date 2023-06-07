@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('closeAlertBox', (label) =>{
+    cy.url().should('include', 'olx.com');
+    cy.title().should('eq', 'OLX - Buy and Sell for free anywhere in Pakistan with OLX online classifieds');
+    cy.get('button').contains(label).should('be.visible').click();
+})
