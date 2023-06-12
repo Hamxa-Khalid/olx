@@ -1,5 +1,8 @@
 import { loginOlx } from "../support/pages/loginOlxPO/loginOlxPO";
 const loginOlxObj = new loginOlx();
+import { validateSearchResultOlx } from "./pages/validateSearchResultInTitleOlxPO/validateSearchResultInTitleOlxPO";
+const validateSearchResultObj = new validateSearchResultOlx();
+
 
 Cypress.Commands.add('closeAlertBox', (label) =>{
     cy.url().should('include', 'olx.com');
@@ -18,4 +21,9 @@ Cypress.Commands.add('loginOlxcmd', (email,password) => {
         loginOlxObj.getPasswordTexBox().type(password);
         loginOlxObj.getLoginButtonUnderPassword().contains("Log in").click();
 
+})
+
+Cypress.Commands.add('searchOlxcmd', (search) => {
+    validateSearchResultObj.getHeaderSearchBox().type(search);
+        validateSearchResultObj.getHeaderSearchButton().click();
 })
