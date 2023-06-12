@@ -12,8 +12,7 @@ describe("Validate Search Result Olx ", function (){
 
     it("Validate Search Result In Olx", function () {
         cy.loginOlxcmd(this.data.email, this.data.password);
-        validateSearchResultObj.getHeaderSearchBox().type("iphone 14 pro max");
-        validateSearchResultObj.getHeaderSearchButton().click();
+        cy.searchOlxcmd('iphone 14 pro max');
         validateSearchResultObj.getSearchResultListTitle().each( (item) => {
     
           cy.wrap(item).contains('pro max', {matchCase: false})
