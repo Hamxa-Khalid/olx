@@ -2,6 +2,10 @@ import { loginOlx } from "../support/pages/loginOlxPO/loginOlxPO";
 const loginOlxObj = new loginOlx();
 import { validateSearchResultOlx } from "./pages/validateSearchResultInTitleOlxPO/validateSearchResultInTitleOlxPO";
 const validateSearchResultObj = new validateSearchResultOlx();
+import { adCreationOlx } from "./pages/adCreationOlxPO/adCreationOlxPO";
+const adCreationOlxObj = new adCreationOlx();
+
+
 
 
 Cypress.Commands.add('closeAlertBox', (label) =>{
@@ -25,5 +29,15 @@ Cypress.Commands.add('loginOlxcmd', (email,password) => {
 
 Cypress.Commands.add('searchOlxcmd', (search) => {
     validateSearchResultObj.getHeaderSearchBox().type(search);
-        validateSearchResultObj.getHeaderSearchButton().click();
+    validateSearchResultObj.getHeaderSearchButton().click();
+})
+
+Cypress.Commands.add('selectCategorycmd', (category) => {
+    adCreationOlxObj.getHeaderSellButton().click();
+    cy.url().should('include', '/post');
+
+    category.forEach(category => {
+        adCreationOlxObj.getAdCategoryOlx().contains(category).click();
+    });
+
 })
