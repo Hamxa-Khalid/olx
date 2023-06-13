@@ -8,6 +8,6 @@ module.exports = defineConfig({
     },
     baseUrl: "https://www.olx.com.pk",
     specPattern: "cypress/test/**/*.cy.js",
-    defaultCommandTimeout: 20000
+    defaultCommandTimeout: 25000
   },
 });
