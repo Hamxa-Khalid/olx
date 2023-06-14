@@ -48,4 +48,28 @@ export class adCreationOlx {
         return cy.get('div');
     }
 
+    getUserProfileDropDownArrow () {
+        return cy.get('[alt="User profile dropdown arrow"]');
+    }
+
+    getMyAdsOption() {
+        return cy.get('div');
+    }
+
+    getAdTitle() {
+        return cy.get('[aria-label="Ad title"]');
+    }
+
+    getAdImg() {
+        return cy.get('img[role="presentation"]');
+    }
+
+    getPostedAdTitle () {
+        return cy.get('h1');
+    }
+
+    getPostedAdDescription(){
+        return cy.get('[aria-label="Description"]');
+    }
+
 }
