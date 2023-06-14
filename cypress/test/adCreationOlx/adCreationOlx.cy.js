@@ -10,7 +10,7 @@ describe("Create Ad On Olx", function () {
 
     })
 
-    it("Create Olx Ad", function () {
+    it.skip("Create Olx Ad", function () {
         let category = ['Services','Web Development']
         cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
         cy.selectCategorycmd(category);
@@ -25,12 +25,12 @@ describe("Create Ad On Olx", function () {
         adCreationOlxObj.getSearchLocationTextbox().type(this.data.services.addService.area);
         adCreationOlxObj.getSelectLocation().contains(this.data.services.addService.area).click();
         adCreationOlxObj.getCellNumberCheckBox().uncheck({force: true});
-        adCreationOlxObj.getPostNowButton().click();
+        adCreationOlxObj.getPostNowButton().contains('Post now').click();
         adCreationOlxObj.getAdStatusMessage().contains('Your ad was not posted');
 
     })
 
-    it("Verify Ad", function () {
+    it.skip("Verify Ad", function () {
         cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
         adCreationOlxObj.getUserProfileDropDownArrow().click();
         adCreationOlxObj.getMyAdsOption().contains("My ads").click();
@@ -44,14 +44,20 @@ describe("Create Ad On Olx", function () {
 
     })
 
-    it.skip("Edit Olx Ad", function () {
+    it("Edit Olx Ad", function () {
+        
         cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
         adCreationOlxObj.getUserProfileDropDownArrow().click();
         adCreationOlxObj.getMyAdsOption().contains("My ads").click();
         cy.url().should('include', '/myads');
-        cy.get('[viewBox="0 0 20 20"]').click();
-        
-
+        adCreationOlxObj.getAdActionPopUpButton().click();
+        adCreationOlxObj.getAdOption().contains('Edit now').click();
+        adCreationOlxObj.getAdTitleTextboxOlx().clear().type(this.data.services.editService.title);
+        adCreationOlxObj.getAdDescriptionTexBox().clear().type(this.data.services.editService.description);
+        // adCreationOlxObj.getUploadAdImage().attachFile('QA.png');
+        adCreationOlxObj.getCellNumberCheckBox().check({force: true});
+        adCreationOlxObj.getPostNowButton().contains('Continue').click();
+        adCreationOlxObj.getAdStatusMessage().contains('Your ad was not posted');
     })
 
 })

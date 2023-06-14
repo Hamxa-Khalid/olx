@@ -32,6 +32,10 @@ export class adCreationOlx {
         return cy.get('div');
     }
 
+    getNeightbourhoodLabel () {
+        return cy.get('label[for="Neighbourhood"]')
+    }
+
     getNeighbourhoodButton () {
         return cy.get('#Neighbourhood')
     }
@@ -70,6 +74,14 @@ export class adCreationOlx {
 
     getPostedAdDescription(){
         return cy.get('[aria-label="Description"]');
+    }
+
+    getAdActionPopUpButton() {
+        return cy.get('[viewBox="0 0 20 20"]');
+    }
+
+    getAdOption() {
+        return cy.get('div[aria-label="Ad options"]');
     }
 
 }

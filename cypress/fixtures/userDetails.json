@@ -12,7 +12,11 @@
       "area": "Shamsher Town"
     },
     "editService":{
-
+      "title": "Web Developer",
+      "description": "To Polish My Skills In The Field Of SE.",
+      "location": "Lahore",
+      "province": "Lahore, Punjab",
+      "area": "DHA Defence"
     }
   }
 }
