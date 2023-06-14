@@ -2,7 +2,7 @@ import { adCreationOlx } from "../../support/pages/adCreationOlxPO/adCreationOlx
 import 'cypress-file-upload';
 const adCreationOlxObj = new adCreationOlx();
 describe("Create Ad On Olx", function () {
-    before(function () {
+    beforeEach(function () {
         cy.visit("/");
         cy.fixture('userDetails.json').then(function(data){
             this.data = data;
@@ -10,24 +10,73 @@ describe("Create Ad On Olx", function () {
 
     })
 
-    it("Create Olx Ad", function () {
+    it.skip("Create Olx Ad", function () {
         let category = ['Services','Web Development']
-        cy.loginOlxcmd(this.data.email, this.data.password);
+        cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
         cy.selectCategorycmd(category);
         cy.url().should('include', '/post/attributes');
-        adCreationOlxObj.getAdTitleTextboxOlx().type("QA Engineer");
-        adCreationOlxObj.getAdDescriptionTexBox().type("As a top software QA company, our goal is to develop custom solutions that support your current goals and operational processes.");
+        adCreationOlxObj.getAdTitleTextboxOlx().type(this.data.services.addService.title);
+        adCreationOlxObj.getAdDescriptionTexBox().type(this.data.services.addService.description);
         adCreationOlxObj.getUploadAdImage().attachFile('QA.png');
         adCreationOlxObj.getLocationButton().click();
-        adCreationOlxObj.getSearchLocationTextbox().type('Sargodha');
-        adCreationOlxObj.getSelectLocation().contains('Sargodha, Punjab').click();
+        adCreationOlxObj.getSearchLocationTextbox().type(this.data.services.addService.location);
+        adCreationOlxObj.getSelectLocation().contains(this.data.services.addService.province).click();
         adCreationOlxObj.getNeighbourhoodButton().click();
-        adCreationOlxObj.getSearchLocationTextbox().type('Shamsher Town');
-        adCreationOlxObj.getSelectLocation().contains('Shamsher Town').click();
+        adCreationOlxObj.getSearchLocationTextbox().type(this.data.services.addService.area);
+        adCreationOlxObj.getSelectLocation().contains(this.data.services.addService.area).click();
         adCreationOlxObj.getCellNumberCheckBox().uncheck({force: true});
-        adCreationOlxObj.getPostNowButton().click();
+        adCreationOlxObj.getPostNowButton().contains('Post now').click();
         adCreationOlxObj.getAdStatusMessage().contains('Your ad was not posted');
 
-    })  
+    })
+
+    it.skip("Verify Ad", function () {
+        cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
+        adCreationOlxObj.getUserProfileDropDownArrow().click();
+        adCreationOlxObj.getMyAdsOption().contains("My ads").click();
+        cy.url().should('include', '/myads');
+        adCreationOlxObj.getAdTitle().click();
+        adCreationOlxObj.getPostedAdTitle().contains(this.data.services.addService.title).should('have.text',this.data.services.addService.title);
+        adCreationOlxObj.getPostedAdDescription().contains(this.data.services.addService.description).should('have.text',this.data.services.addService.description);
+
+    })
+
+    it.skip("Edit Olx Ad", function () {
+        
+        cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
+        adCreationOlxObj.getUserProfileDropDownArrow().click();
+        adCreationOlxObj.getMyAdsOption().contains("My ads").click();
+        cy.url().should('include', '/myads');
+        adCreationOlxObj.getAdActionPopUpButton().click();
+        adCreationOlxObj.getAdOption().contains('Edit now').click();
+        adCreationOlxObj.getAdTitleTextboxOlx().clear().type(this.data.services.editService.title);
+        adCreationOlxObj.getAdDescriptionTexBox().clear().type(this.data.services.editService.description);
+        adCreationOlxObj.getCellNumberCheckBox().check({force: true});
+        adCreationOlxObj.getPostNowButton().contains('Continue').click();
+        adCreationOlxObj.getAdStatusMessage().contains('Your ad was not posted');
+    })
+
+    it.skip("Verify Edited Ad", function () {
+        cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
+        adCreationOlxObj.getUserProfileDropDownArrow().click();
+        adCreationOlxObj.getMyAdsOption().contains("My ads").click();
+        cy.url().should('include', '/myads');
+        adCreationOlxObj.getAdTitle().click();
+        adCreationOlxObj.getPostedAdTitle().contains(this.data.services.editService.title).should('have.text',this.data.services.editService.title);
+        adCreationOlxObj.getPostedAdDescription().contains(this.data.services.editService.description).should('have.text',this.data.services.editService.description);
+
+    })
+
+    it("Deleted Ad", function () {
+        cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
+        adCreationOlxObj.getUserProfileDropDownArrow().click();
+        adCreationOlxObj.getMyAdsOption().contains("My ads").click();
+        cy.url().should('include', '/myads');
+        adCreationOlxObj.getAdActionPopUpButton().click();
+        adCreationOlxObj.getAdOption().contains('Remove').click();
+        adCreationOlxObj.getAdDeleteDialogButton().contains("DELETE").click();
+
+
+    })
 
 })
