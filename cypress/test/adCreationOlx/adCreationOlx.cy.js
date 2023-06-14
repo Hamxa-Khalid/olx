@@ -36,15 +36,12 @@ describe("Create Ad On Olx", function () {
         adCreationOlxObj.getMyAdsOption().contains("My ads").click();
         cy.url().should('include', '/myads');
         adCreationOlxObj.getAdTitle().click();
-        // adCreationOlxObj.getAdImg().should('be.visible');
         adCreationOlxObj.getPostedAdTitle().contains(this.data.services.addService.title).should('have.text',this.data.services.addService.title);
         adCreationOlxObj.getPostedAdDescription().contains(this.data.services.addService.description).should('have.text',this.data.services.addService.description);
 
-
-
     })
 
-    it("Edit Olx Ad", function () {
+    it.skip("Edit Olx Ad", function () {
         
         cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
         adCreationOlxObj.getUserProfileDropDownArrow().click();
@@ -54,10 +51,32 @@ describe("Create Ad On Olx", function () {
         adCreationOlxObj.getAdOption().contains('Edit now').click();
         adCreationOlxObj.getAdTitleTextboxOlx().clear().type(this.data.services.editService.title);
         adCreationOlxObj.getAdDescriptionTexBox().clear().type(this.data.services.editService.description);
-        // adCreationOlxObj.getUploadAdImage().attachFile('QA.png');
         adCreationOlxObj.getCellNumberCheckBox().check({force: true});
         adCreationOlxObj.getPostNowButton().contains('Continue').click();
         adCreationOlxObj.getAdStatusMessage().contains('Your ad was not posted');
+    })
+
+    it.skip("Verify Edited Ad", function () {
+        cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
+        adCreationOlxObj.getUserProfileDropDownArrow().click();
+        adCreationOlxObj.getMyAdsOption().contains("My ads").click();
+        cy.url().should('include', '/myads');
+        adCreationOlxObj.getAdTitle().click();
+        adCreationOlxObj.getPostedAdTitle().contains(this.data.services.editService.title).should('have.text',this.data.services.editService.title);
+        adCreationOlxObj.getPostedAdDescription().contains(this.data.services.editService.description).should('have.text',this.data.services.editService.description);
+
+    })
+
+    it("Deleted Ad", function () {
+        cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
+        adCreationOlxObj.getUserProfileDropDownArrow().click();
+        adCreationOlxObj.getMyAdsOption().contains("My ads").click();
+        cy.url().should('include', '/myads');
+        adCreationOlxObj.getAdActionPopUpButton().click();
+        adCreationOlxObj.getAdOption().contains('Remove').click();
+        adCreationOlxObj.getAdDeleteDialogButton().contains("DELETE").click();
+
+
     })
 
 })

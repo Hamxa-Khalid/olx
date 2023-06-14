@@ -84,4 +84,8 @@ export class adCreationOlx {
         return cy.get('div[aria-label="Ad options"]');
     }
 
+    getAdDeleteDialogButton () {
+        return cy.get('button[type="submit"]');
+    }
+
 }
