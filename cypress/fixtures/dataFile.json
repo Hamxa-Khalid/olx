@@ -3,15 +3,15 @@
     "email": "hamxi8381@gmail.com",
     "password": "916f996c"
   },
-  "services":{
-    "addService":{
+  "services": {
+    "addService": {
       "title": "QA Engineer",
       "description": "As a top software QA company, our goal is to develop custom solutions.",
       "location": "Sargodha",
       "province": "Punjab",
       "area": "Shamsher Town"
     },
-    "editService":{
+    "editService": {
       "title": "Web Developer",
       "description": "To Polish My Skills In The Field Of SE.",
       "location": "Lahore",
