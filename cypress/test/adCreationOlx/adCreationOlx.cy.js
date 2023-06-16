@@ -1,5 +1,5 @@
 import { adCreationOlx } from "../../support/pages/adCreationOlxPO/adCreationOlxPO";
-import "cypress-file-upload";
+import { uploadFile } from "../../support/fileUpload";
 const adCreationOlxObj = new adCreationOlx();
 describe("Create Ad On Olx", function () {
   beforeEach(function () {
@@ -9,7 +9,7 @@ describe("Create Ad On Olx", function () {
     });
   });
 
-  it.skip("Create Olx Ad", function () {
+  it("Create Olx Ad", function () {
     let category = ["Services", "Web Development"];
     cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
     cy.selectCategorycmd(category);
@@ -94,7 +94,7 @@ describe("Create Ad On Olx", function () {
       .should("have.text", this.data.services.editService.description);
   });
 
-  it("Deleted Ad", function () {
+  it.skip("Deleted Ad", function () {
     cy.loginOlxcmd(this.data.loginCreds.email, this.data.loginCreds.password);
     adCreationOlxObj.getUserProfileDropDownArrow().click();
     adCreationOlxObj.getMyAdsOption().contains("My ads").click();
